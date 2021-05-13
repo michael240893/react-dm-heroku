@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex:1,
   },
   content:{
-    padding:theme.spacing(2),
+    padding:theme.spacing(3),
     flex:1,
     zIndex:1,
   },
@@ -18,10 +18,7 @@ const useStyles = makeStyles((theme) => ({
       display:"flex"
   },
   hideButton:{
-      display:"inline-block"
-  },
-  invisible:{
-      display:'none'
+      alignSelf:"start"
   },
 
 }));
