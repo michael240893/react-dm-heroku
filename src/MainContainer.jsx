@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Toolbar} from '@material-ui/core';
+import {Container} from '@material-ui/core';
 import {makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,6 @@ export default function MainContainer (props) {
   const classes=useStyles();
  
     return (<div className={classes.content}>
-              <Toolbar />
               <Container className={classes.container} maxWidth="md">
                 {props.children}
               </Container>

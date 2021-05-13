@@ -11,9 +11,7 @@ import Message from "./Message";
 import AppInfoComponent from './AppInfoComponent';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display:"flex",
-  },
+
   contentBox:{
       marginTop:theme.spacing(2),
       marginBottom:theme.spacing(2),
@@ -48,7 +46,7 @@ export default function MainComponent(props){
     )
 
     return(
-        <div className={classes.root}>
+        <div>
             <AppBar >
                 <Toolbar>
                     <Typography variant="h5">
@@ -56,6 +54,8 @@ export default function MainComponent(props){
                     </Typography>
                 </Toolbar>
             </AppBar>    
+            <AppInfoComponent/>     
+
             <MainContainer>
                 <Typography className={classes.header} variant="h4">Prediction</Typography>  
                 {(locations.error||windDirections.error)?<Message severity="error">An error occurred when loading the data from the server</Message>:null}
@@ -68,7 +68,6 @@ export default function MainComponent(props){
                 }
 
             </MainContainer>  
-            <AppInfoComponent/>     
         </div>
 
     )
