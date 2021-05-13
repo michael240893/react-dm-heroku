@@ -8,6 +8,7 @@ import PredictionComponent from './PredictionComponent';
 import {useQuery} from 'react-query';
 import CenteredCircularProgress from './CenteredCircularProgress';
 import Message from "./Message";
+import AppInfoComponent from './AppInfoComponent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,12 +52,12 @@ export default function MainComponent(props){
             <AppBar >
                 <Toolbar>
                     <Typography variant="h5">
-                        Weather-Australia
+                        Weather Australia
                     </Typography>
                 </Toolbar>
             </AppBar>    
             <MainContainer>
-                <Typography className={classes.header} variant="h4">Weather Prediction</Typography>  
+                <Typography className={classes.header} variant="h4">Prediction</Typography>  
                 {(locations.error||windDirections.error)?<Message severity="error">An error occurred when loading the data from the server</Message>:null}
                 {(locations.isLoading||windDirections.isLoading)&&<CenteredCircularProgress/>}
                 {!locations.isLoading&&locations.data&&!windDirections.isLoading&&windDirections.data&&
@@ -66,7 +67,8 @@ export default function MainComponent(props){
                     />
                 }
 
-            </MainContainer>        
+            </MainContainer>  
+            <AppInfoComponent/>     
         </div>
 
     )
