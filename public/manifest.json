@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Weather Australia",
+  "name": "Data Mining Weather Australia",
   "icons": [
     {
       "src": "favicon.ico",
