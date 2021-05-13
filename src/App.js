@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import BackendProvider from "./providers/BackendProvider";
+import CustomizedThemeProvider from "./providers/CustomizedThemeProvider";
+import CustomizedQueryClientProvider from "./providers/CustomizedQueryClientProvider";
+import MainComponent from "./MainComponent";
+
+const BACKEND="https://flask-dm.herokuapp.com"
+//const BACKEND="http://localhost:5000"
 
 function App() {
+
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BackendProvider backend={BACKEND}>
+      <CustomizedQueryClientProvider>
+        <CustomizedThemeProvider>
+          <MainComponent/>
+        </CustomizedThemeProvider>
+      </CustomizedQueryClientProvider>
+    </BackendProvider>
+
   );
 }
 
