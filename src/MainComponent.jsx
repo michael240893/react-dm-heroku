@@ -33,6 +33,7 @@ export default function MainComponent(props){
 
     const classes=useStyles();
 
+
     const {apiCall}=useBackend();
 
     const locations=useQuery(
@@ -54,7 +55,7 @@ export default function MainComponent(props){
                     </Typography>
                 </Toolbar>
             </AppBar>    
-            <AppInfoComponent/>     
+            <AppInfoComponent/>   
 
             <MainContainer>
                 <Typography className={classes.header} variant="h4">Prediction</Typography>  

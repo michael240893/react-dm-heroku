@@ -1,8 +1,8 @@
 import React from 'react'; 
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Box, Toolbar } from '@material-ui/core';
-
+import { Typography, Divider, Box, Toolbar, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,9 +11,18 @@ const useStyles = makeStyles((theme) => ({
   },
   content:{
     padding:theme.spacing(2),
+    flex:1,
     zIndex:1,
-
-  }
+  },
+  flexLine:{
+      display:"flex"
+  },
+  hideButton:{
+      display:"inline-block"
+  },
+  invisible:{
+      display:'none'
+  },
 
 }));
 
@@ -24,13 +33,22 @@ export default function AppInfoComponent(props){
 
     const classes=useStyles();
 
+    const [appInfo,setAppInfo]=React.useState(true);
+
+
     return(
         <div className={classes.root}>
             <Toolbar></Toolbar>
-            <Box align="center" className={classes.content}>
-                <Typography variant="subtitle1" color="textSecondary">Created by Susanne Zaunmayr and Michael Schimpelsberger as an assignment for the course Data Mining at the Johannes Kepler University Linz during the summer term 2021</Typography>
-            </Box>
-            <Divider/>
+            {appInfo&&<React.Fragment>
+                <div className={classes.flexLine}>
+                    <Box align="center" className={classes.content}>
+                        <Typography variant="subtitle1" color="textSecondary">Created by Susanne Zaunmayr and Michael Schimpelsberger as an assignment for the course Data Mining at the Johannes Kepler University Linz during the summer term 2021</Typography>
+                    </Box>
+                    <IconButton  className={classes.hideButton} variant="outlined" onClick={()=>setAppInfo(false)} ><CloseIcon fontSize="small"/></IconButton>
+
+                </div>
+                <Divider/>
+            </React.Fragment>}
         </div>
     )
 }
