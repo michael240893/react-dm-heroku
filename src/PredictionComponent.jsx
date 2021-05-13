@@ -59,13 +59,13 @@ export default function PredictionComponent(props){
 
     const {apiCall}=useBackend();
 
-    const [rainToday, setRainToday]=React.useState(false);
+    const [rainToday, setRainToday]=React.useState("No");
     const [location, setLocation]=React.useState(props.locations[0]);
     const [windDirection, setWindDirection]=React.useState(props.windDirections[0]);
 
     const reset=()=>{
         dispatch({type:"reset"});
-        setRainToday(false);
+        setRainToday("No");
         setLocation(props.locations[0]);
         setWindDirection(props.windDirections[0]);
     }
@@ -81,7 +81,7 @@ export default function PredictionComponent(props){
         let params={
             location:location,
             windDirection:windDirection,
-            rainToday:rainToday?1:0
+            rainToday:rainToday
         }
         dispatch({type: 'start'})
         apiCall(PREDICTIONS_PATH,"get",params).then(res=>{
@@ -147,8 +147,8 @@ export default function PredictionComponent(props){
                                         getContentAnchorEl:null
                                     }}
                                     >
-                                    <MenuItem value={true}>Yes</MenuItem>
-                                    <MenuItem value={false}>No</MenuItem>
+                                    <MenuItem value="Yes">Yes</MenuItem>
+                                    <MenuItem value="No">No</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>

@@ -1,13 +1,15 @@
 import React from 'react'; 
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Box, Toolbar, IconButton } from '@material-ui/core';
+import { Typography, Divider, Box, Toolbar, IconButton, Collapse } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width:"100%",
     zIndex:1,
+    transition: "height 4s",
+
   },
   content:{
     padding:theme.spacing(3),
@@ -36,7 +38,8 @@ export default function AppInfoComponent(props){
     return(
         <div className={classes.root}>
             <Toolbar></Toolbar>
-            {appInfo&&<React.Fragment>
+            {<Collapse in={appInfo}>
+
                 <div className={classes.flexLine}>
                     <Box align="center" className={classes.content}>
                         <Typography variant="subtitle1" color="textSecondary">Created by Susanne Zaunmayr and Michael Schimpelsberger as an assignment for the course Data Mining at the Johannes Kepler University Linz during the summer term 2021</Typography>
@@ -45,7 +48,7 @@ export default function AppInfoComponent(props){
 
                 </div>
                 <Divider/>
-            </React.Fragment>}
+            </Collapse>}
         </div>
     )
 }
