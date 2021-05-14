@@ -3,8 +3,8 @@ import CustomizedThemeProvider from "./providers/CustomizedThemeProvider";
 import CustomizedQueryClientProvider from "./providers/CustomizedQueryClientProvider";
 import MainComponent from "./MainComponent";
 
-//const BACKEND="https://flask-dm.herokuapp.com"
-const BACKEND="http://localhost:5000"
+const BACKEND="https://flask-dm.herokuapp.com"
+//const BACKEND="http://localhost:5000"
 
 function App() {
 
