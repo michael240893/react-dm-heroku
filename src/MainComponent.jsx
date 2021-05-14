@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LOCATION_PATH="/locations";
-const WIND_DIR_PATH="/wind_directions";
+//const WIND_DIR_PATH="/wind_directions";
 
 
 export default function MainComponent(props){
@@ -41,10 +41,10 @@ export default function MainComponent(props){
         ()=>apiCall(LOCATION_PATH,"get")
     )
     
-    const windDirections=useQuery(
-        WIND_DIR_PATH,
-        ()=>apiCall(WIND_DIR_PATH,"get")
-    )
+    // const windDirections=useQuery(
+    //     WIND_DIR_PATH,
+    //     ()=>apiCall(WIND_DIR_PATH,"get")
+    // )
 
     return(
         <div>
@@ -59,12 +59,11 @@ export default function MainComponent(props){
 
             <MainContainer>
                 <Typography className={classes.header} variant="h4">Prediction</Typography>  
-                {(locations.error||windDirections.error)?<Message severity="error">An error occurred when loading the data from the server</Message>:null}
-                {(locations.isLoading||windDirections.isLoading)&&<CenteredCircularProgress/>}
-                {!locations.isLoading&&locations.data&&!windDirections.isLoading&&windDirections.data&&
+                {locations.error?<Message severity="error">An error occurred when trying to load the available locations from the server</Message>:null}
+                {locations.isLoading&&<CenteredCircularProgress/>}
+                {!locations.isLoading&&locations.data&&
                     <PredictionComponent
                         locations={locations.data}
-                        windDirections={windDirections.data}
                     />
                 }
 

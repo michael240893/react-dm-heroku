@@ -7,7 +7,7 @@ import ContentBox from './ContentBox';
 import ResetButton from './ResetButton';
 import PredictionResult from './PredictionResult';
 import SubmitButton from './SubmitButton';
-import {TextField, Grid, FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
+import {TextField, Grid} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,15 +59,22 @@ export default function PredictionComponent(props){
 
     const {apiCall}=useBackend();
 
-    const [rainToday, setRainToday]=React.useState("No");
     const [location, setLocation]=React.useState(props.locations[0]);
-    const [windDirection, setWindDirection]=React.useState(props.windDirections[0]);
+    const [humidity, setHumidity]=React.useState(0);
+    const [pressure, setPressure]=React.useState(0);
+    const [cloud, setCloud]=React.useState(0);
+    const [sunshine, setSunshine]=React.useState(0);
+    const [rainfall, setRainfall]=React.useState(0);
+
 
     const reset=()=>{
         dispatch({type:"reset"});
-        setRainToday("No");
         setLocation(props.locations[0]);
-        setWindDirection(props.windDirections[0]);
+        setHumidity(0);
+        setPressure(0);
+        setCloud(0);
+        setSunshine(0);
+        setRainfall(0);
     }
 
     const [state,dispatch]=React.useReducer(reducer, initialState);
@@ -80,8 +87,11 @@ export default function PredictionComponent(props){
     const getPrediction=()=>{
         let params={
             location:location,
-            windDirection:windDirection,
-            rainToday:rainToday
+            humidity:humidity,
+            pressure:pressure,
+            rainfall:rainfall,
+            sunshine:sunshine,
+            cloud:cloud
         }
         dispatch({type: 'start'})
         apiCall(PREDICTIONS_PATH,"get",params).then(res=>{
@@ -113,45 +123,20 @@ export default function PredictionComponent(props){
                                 />
                         </Grid> 
                         <Grid item xs={6}>
-                            <Autocomplete
-                                    margin="none"
-                                    value={windDirection}
-                                    onChange={(event, newValue) => {
-                                      if (event.reason==="clear"){
-                                          setWindDirection("");
-                                      }
-                                      else setWindDirection(newValue);
-                                    }}
-                                    options={props.windDirections}
-                                    getOptionLabel={(option) => option}
-                                    renderInput={(params) => <TextField {...params}  label="Wind Direction" variant="outlined" />}
-                                    />
+                            <TextField margin="none" fullWidth label="Humidity" type="number" value={humidity} onChange={(e)=>setHumidity(e.target.value)} variant="outlined" />
                         </Grid> 
                         <Grid item xs={6}>
-                            <FormControl  fullWidth variant="outlined"   margin="none">
-                                <InputLabel id="locked-label">Rained Today</InputLabel>
-                                    <Select labelId="locked-label"
-                                    value={rainToday}
-                                    name="lock"
-                                    onChange={(e)=>setRainToday(e.target.value)}
-                                    label="Account status"
-                                    MenuProps={{
-                                        anchorOrigin: {
-                                        vertical: "bottom",
-                                        horizontal: "left"
-                                        },
-                                        transformOrigin: {
-                                        vertical: "top",
-                                        horizontal: "left"
-                                        },
-                                        getContentAnchorEl:null
-                                    }}
-                                    >
-                                    <MenuItem value="Yes">Yes</MenuItem>
-                                    <MenuItem value="No">No</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <TextField margin="none" fullWidth label="Pressure" type="number" value={pressure} onChange={(e)=>setPressure(e.target.value)} variant="outlined" />
                         </Grid>
+                        <Grid item xs={6}>
+                            <TextField margin="none" fullWidth label="Cloud" type="number" value={cloud} onChange={(e)=>setCloud(e.target.value)} variant="outlined" />
+                        </Grid> 
+                        <Grid item xs={6}>
+                            <TextField margin="none" fullWidth label="Sunshine" type="number" value={sunshine} onChange={(e)=>setSunshine(e.target.value)} variant="outlined" />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField margin="none" fullWidth label="Rainfall" type="number" value={rainfall} onChange={(e)=>setRainfall(e.target.value)} variant="outlined" />
+                        </Grid> 
 
                     </Grid>
                    
