@@ -3,13 +3,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, IconButton, Toolbar, Typography, Tooltip, Paper, Popper, ClickAwayListener, List, ListItem, ListItemText } from '@material-ui/core';
 import MainContainer from './MainContainer';
-import { useBackend } from './providers/BackendProvider';
 import PredictionComponent from './PredictionComponent';
-import {useQuery} from 'react-query';
-import CenteredCircularProgress from './CenteredCircularProgress';
-import Message from "./Message";
 import AppInfoComponent from './AppInfoComponent';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -31,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
   }
 
 }));
-
-const LOCATION_PATH="/locations";
 
 
 function Menu (props) {
@@ -58,21 +53,19 @@ export default function MainComponent(props){
 
     const classes=useStyles();
 
-
-    const {apiCall}=useBackend();
-
     const menuRef=React.useRef();
     const [menuOpen, setMenuOpen]=React.useState(false);
 
-    const locations=useQuery(
-        LOCATION_PATH,
-        ()=>apiCall(LOCATION_PATH,"get")
-    )
 
     const openRepository=(url)=>{
         setMenuOpen(false)
         window.open(url);
     }
+
+    const openModel=()=>{
+        window.open(process.env.PUBLIC_URL+"/model.txt")
+    }
+
     
 
     return(
@@ -83,6 +76,9 @@ export default function MainComponent(props){
                         Weather Australia
                     </Typography>
                     <div className={classes.right}/>
+                    <Tooltip title="Open Model Tree">
+                        <IconButton onClick={()=>openModel()} ref={menuRef} color="inherit"><DescriptionIcon/></IconButton>
+                    </Tooltip>
                     <Tooltip title="Source Code">
                         <IconButton onClick={()=>setMenuOpen(true)} ref={menuRef} color="inherit"><GitHubIcon/></IconButton>
                     </Tooltip>
@@ -92,14 +88,10 @@ export default function MainComponent(props){
 
             <MainContainer>
                 <Typography className={classes.header} variant="h4">Prediction</Typography>  
-                {locations.error?<Message severity="error">An error occurred when trying to load the available locations from the server</Message>:null}
-                {locations.isLoading&&<CenteredCircularProgress/>}
-                {!locations.isLoading&&locations.data&&
-
-                    <PredictionComponent
-                        locations={locations.data}
-                    />
-                }
+  
+                <PredictionComponent
+                />
+                
 
                 {menuOpen&&<Menu
                 className={classes.popper}
@@ -115,8 +107,9 @@ export default function MainComponent(props){
                         </ListItem>
                     </List>
             </Menu>}
-
+    
             </MainContainer>  
+
         </div>
 
     )

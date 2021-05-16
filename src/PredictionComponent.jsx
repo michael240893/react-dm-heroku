@@ -8,7 +8,6 @@ import ResetButton from './ResetButton';
 import PredictionResult from './PredictionResult';
 import SubmitButton from './SubmitButton';
 import {TextField, Grid} from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,22 +58,25 @@ export default function PredictionComponent(props){
 
     const {apiCall}=useBackend();
 
-    const [location, setLocation]=React.useState(props.locations[0]);
     const [humidity, setHumidity]=React.useState(0);
-    const [pressure, setPressure]=React.useState(0);
-    const [cloud, setCloud]=React.useState(0);
-    const [sunshine, setSunshine]=React.useState(0);
     const [rainfall, setRainfall]=React.useState(0);
+    const [sunshine, setSunshine]=React.useState(0);
+    const [pressure, setPressure]=React.useState(0);
+    const [windGustSpeed, setWindGustSpeed]=React.useState(0);
+    const [minTemp, setMinTemp]=React.useState(0);
 
 
     const reset=()=>{
         dispatch({type:"reset"});
-        setLocation(props.locations[0]);
         setHumidity(0);
-        setPressure(0);
-        setCloud(0);
-        setSunshine(0);
         setRainfall(0);
+        setSunshine(0);
+        setPressure(0);
+        setWindGustSpeed(0);
+        setMinTemp(0);
+
+        
+
     }
 
     const [state,dispatch]=React.useReducer(reducer, initialState);
@@ -86,12 +88,12 @@ export default function PredictionComponent(props){
 
     const getPrediction=()=>{
         let params={
-            location:location,
             humidity:humidity,
-            pressure:pressure,
             rainfall:rainfall,
             sunshine:sunshine,
-            cloud:cloud
+            pressure:pressure,
+            wind_gust_speed:windGustSpeed,
+            min_temp:minTemp
         }
         dispatch({type: 'start'})
         apiCall(PREDICTIONS_PATH,"get",params).then(res=>{
@@ -107,36 +109,30 @@ export default function PredictionComponent(props){
             <ContentBox className={classes.contentBox}>
                     <form onSubmit={handleSubmit}>
                     <Grid container spacing={4}>
-                        <Grid item xs={6}>
-                            <Autocomplete
-                                value={location}
-                                onChange={(event, newValue) => {
-                                  if (event.reason==="clear"){
-                                      setLocation("");
-                                  }
-                                  else setLocation(newValue);
-                                }}
-                                margin="none"
-                                options={props.locations}
-                                getOptionLabel={(option) => option}
-                                renderInput={(params) => <TextField {...params} label="Locations" variant="outlined" />}
-                                />
-                        </Grid> 
+                     
                         <Grid item xs={6}>
                             <TextField margin="none" fullWidth label="Humidity" type="number" value={humidity} onChange={(e)=>setHumidity(e.target.value)} variant="outlined" />
                         </Grid> 
                         <Grid item xs={6}>
-                            <TextField margin="none" fullWidth label="Pressure" type="number" value={pressure} onChange={(e)=>setPressure(e.target.value)} variant="outlined" />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField margin="none" fullWidth label="Cloud" type="number" value={cloud} onChange={(e)=>setCloud(e.target.value)} variant="outlined" />
+                            <TextField margin="none" fullWidth label="Rainfall" type="number" value={rainfall} onChange={(e)=>setRainfall(e.target.value)} variant="outlined" />
                         </Grid> 
                         <Grid item xs={6}>
                             <TextField margin="none" fullWidth label="Sunshine" type="number" value={sunshine} onChange={(e)=>setSunshine(e.target.value)} variant="outlined" />
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField margin="none" fullWidth label="Rainfall" type="number" value={rainfall} onChange={(e)=>setRainfall(e.target.value)} variant="outlined" />
+                            <TextField margin="none" fullWidth label="Pressure" type="number" value={pressure} onChange={(e)=>setPressure(e.target.value)} variant="outlined" />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField margin="none" fullWidth label="Wind Gust Speed" type="number" value={windGustSpeed} onChange={(e)=>setWindGustSpeed(e.target.value)} variant="outlined" />
                         </Grid> 
+                        <Grid item xs={6}>
+                            <TextField margin="none" fullWidth label="Minimum Temperature" type="number" value={minTemp} onChange={(e)=>setMinTemp(e.target.value)} variant="outlined" />
+                        </Grid> 
+                    
+                        
+                        <Grid item xs={6}>
+              
+              </Grid> 
 
                     </Grid>
                    

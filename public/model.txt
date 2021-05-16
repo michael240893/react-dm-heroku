@@ -1,0 +1,46 @@
+|--- Humidity3pm <= 71.50
+|   |--- Rainfall <= 1.45
+|   |   |--- Sunshine <= 7.55
+|   |   |   |--- Pressure3pm <= 1016.15
+|   |   |   |   |--- class: No
+|   |   |   |--- Pressure3pm >  1016.15
+|   |   |   |   |--- class: No
+|   |   |--- Sunshine >  7.55
+|   |   |   |--- Humidity3pm <= 51.24
+|   |   |   |   |--- class: No
+|   |   |   |--- Humidity3pm >  51.24
+|   |   |   |   |--- class: No
+|   |--- Rainfall >  1.45
+|   |   |--- Humidity3pm <= 51.24
+|   |   |   |--- Sunshine <= 6.55
+|   |   |   |   |--- class: No
+|   |   |   |--- Sunshine >  6.55
+|   |   |   |   |--- class: No
+|   |   |--- Humidity3pm >  51.24
+|   |   |   |--- WindGustSpeed <= 49.00
+|   |   |   |   |--- class: No
+|   |   |   |--- WindGustSpeed >  49.00
+|   |   |   |   |--- class: Yes
+|--- Humidity3pm >  71.50
+|   |--- Humidity3pm <= 83.50
+|   |   |--- WindGustSpeed <= 47.00
+|   |   |   |--- Rainfall <= 1.45
+|   |   |   |   |--- class: No
+|   |   |   |--- Rainfall >  1.45
+|   |   |   |   |--- class: Yes
+|   |   |--- WindGustSpeed >  47.00
+|   |   |   |--- Rainfall <= 0.30
+|   |   |   |   |--- class: Yes
+|   |   |   |--- Rainfall >  0.30
+|   |   |   |   |--- class: Yes
+|   |--- Humidity3pm >  83.50
+|   |   |--- MinTemp <= 2.05
+|   |   |   |--- Pressure3pm <= 1014.30
+|   |   |   |   |--- class: Yes
+|   |   |   |--- Pressure3pm >  1014.30
+|   |   |   |   |--- class: No
+|   |   |--- MinTemp >  2.05
+|   |   |   |--- Pressure3pm <= 1014.95
+|   |   |   |   |--- class: Yes
+|   |   |   |--- Pressure3pm >  1014.95
+|   |   |   |   |--- class: Yes
