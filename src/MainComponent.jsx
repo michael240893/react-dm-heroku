@@ -76,7 +76,7 @@ export default function MainComponent(props){
                         Weather Australia
                     </Typography>
                     <div className={classes.right}/>
-                    <Tooltip title="Open Model Tree">
+                    <Tooltip title="Open Decision Tree">
                         <IconButton onClick={()=>openModel()} ref={menuRef} color="inherit"><DescriptionIcon/></IconButton>
                     </Tooltip>
                     <Tooltip title="Source Code">
@@ -103,7 +103,7 @@ export default function MainComponent(props){
                             <ListItemText disableTypography primary="Github Repository - Flask Backend"> </ListItemText>
                         </ListItem>
                         <ListItem button onClick={()=>openRepository(REACT_FRONEND_REPO_URL)}>
-                            <ListItemText disableTypography primary="Repository React - React Frontend"> </ListItemText>
+                            <ListItemText disableTypography primary="Github Repository - React Frontend"> </ListItemText>
                         </ListItem>
                     </List>
             </Menu>}
